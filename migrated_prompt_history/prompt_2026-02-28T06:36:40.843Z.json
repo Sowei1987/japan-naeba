@@ -1,0 +1,26 @@
+[
+  {
+    "id": 11,
+    "author": "model",
+    "payload": {
+      "type": "error",
+      "error": "The task was canceled.",
+      "metadata": {
+        "message": "",
+        "isQuotaExceeded": false
+      },
+      "isCancelError": true,
+      "isLoopingError": false
+    },
+    "createdTimestamp": {
+      "seconds": 1772260595,
+      "nanos": 813009000
+    },
+    "doneTimestamp": {
+      "seconds": 1772260595,
+      "nanos": 813009000
+    },
+    "turnIdentifier": "1772260595-813009000",
+    "status": 3
+  }
+]
