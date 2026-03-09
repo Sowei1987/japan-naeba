@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="苗場滑雪">
     
-    <title>日本苗場滑雪之旅 (v5.8)</title>
+    <title>日本苗場滑雪之旅 (v6.1)</title>
     
     <!-- PWA Manifest & Icons -->
     <link rel="manifest" href="./manifest.json">
@@ -107,7 +107,7 @@
         <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #F5F5F7;">
             <div class="loader"></div>
             <div style="margin-top: 20px; color: #1E3A8A; font-weight: bold;">Loading Japan Trip...</div>
-            <div style="margin-top: 10px; font-size: 12px; color: #9CA3AF;">v5.8 Updated</div>
+            <div style="margin-top: 10px; font-size: 12px; color: #9CA3AF;">v6.2 Updated</div>
         </div>
     </div>
 
@@ -128,8 +128,8 @@
     <script type="text/babel">
         const { useState, useEffect, useMemo, Component } = React;
 
-        const APP_VERSION = "v5.8";
-        const STORAGE_KEY = "japan_ski_2026_storage"; 
+        const APP_VERSION = "v6.2";
+        const STORAGE_KEY = "japan_ski_2026_storage_v6_2"; 
 
         const RESTAURANTS = [
             { name: "人形町今半 (上野廣小路店)", desc: "百年老店頂級壽喜燒，午餐CP值高，晚餐極致享受。", map: "https://www.google.com/maps/search/?api=1&query=人形町今半+上野廣小路店", image: "https://picsum.photos/seed/sukiyaki/400/250" },
@@ -149,10 +149,11 @@
           { 
             day: 1, date: "3/15", dayOfWeek: "日", fullDate: "2026-03-15", weather: "☁️", tempHigh: 13, tempLow: 6, rainProb: 20, location: "東京 (上野)", focus: "入境與上野補給", 
             activities: [ 
-              { time: "08:12", title: "高鐵 806次", type: "交通", iconName: "Train", desc: "雲林 08:12 → 桃園 09:18 (座位：7車 9A~9E)" },
-              { time: "12:50", title: "TPE 出發 (CX450)", type: "交通", iconName: "Plane", desc: "國泰航空，桃園第一航廈。預計飛行 3小時。" }, 
+              { time: "08:12", title: "高鐵 806次", type: "交通", iconName: "Train", desc: "雲林 08:12 → 桃園 09:18 (座位：7車 9A~9E)。\n【路線：台灣高鐵，直達無須換線】" },
+              { time: "12:50", title: "TPE 出發 (CX450)", type: "交通", iconName: "Plane", desc: "國泰航空 CX450\n桃園國際機場 (TPE) 第一航廈 12:50 起飛\n➔ 成田國際機場 (NRT) 第二航廈 16:50 抵達\n預計飛行時間：3小時" }, 
               { time: "16:50", title: "抵達 NRT 成田機場", type: "交通", iconName: "MapIcon", desc: "辦理入境與提領行李。" }, 
-              { time: "18:00", title: "Skyliner 前往上野", type: "交通", iconName: "Train", desc: "票價：2,580 円 (指定席)，車程 41 分鐘 (抵達京成上野站)。" }, 
+              { time: "18:00", title: "Skyliner 前往上野", type: "交通", iconName: "Train", desc: "票價：2,580 円 (指定席)，車程 41 分鐘 (抵達京成上野站)。\n【路線：京成電鐵 Skyliner，直達無須換線】" }, 
+              { time: "19:00", title: "上野住宿 Check-in", type: "住宿", iconName: "Home", desc: "辦理入住。⚠️ 備註：需轉帳住宿尾款 17,240 (台幣)。" },
               { time: "19:30", title: "JR 上野站預購", type: "checklist", iconName: "Wallet", desc: "於 JR 上野站購妥明日往越後湯澤之車票。" },
               { time: "20:30", title: "Dount mori (站內)", type: "美食", iconName: "Utensils", desc: "精緻甜甜圈，口感獨特。", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Dount+mori+上野" },
               { time: "21:00", title: "あいだや 2店", type: "美食", iconName: "Utensils", desc: "超人氣餛飩拉麵、沾麵。", image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=あいだや+上野" },
@@ -167,11 +168,11 @@
               { time: "08:20", title: "Andersen (麵包店)", type: "美食", iconName: "Utensils", desc: "美味現烤麵包。", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=400&auto=format&fit=crop", mapLink: "https://maps.app.goo.gl/nwEGkcPKTN2NtTjW7" },
               { time: "08:40", title: "Scone (站內麵包店)", type: "美食", iconName: "Utensils", desc: "站內方便購買的司康與麵包。", image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=400&auto=format&fit=crop", mapLink: "https://maps.app.goo.gl/yvGuJcguHnWVpCMBA" },
               { time: "09:00", title: "Beck's Coffee Ueno", type: "美食", iconName: "Coffee", desc: "咖啡與吐司輕食。", image: "https://images.unsplash.com/photo-1481833761820-0509d3217039?q=80&w=400&auto=format&fit=crop", mapLink: "https://maps.app.goo.gl/3xYvzHmn3oEGATmcA" },
-              { time: "09:34", title: "新幹線 (上野→越後湯澤)", type: "交通", iconName: "Train", desc: "單程票價：8,410 円 (指定席)\n[09:34-10:50] Toki 311 號\n[09:58-11:15] Tanigawa 407 號 (首選)\n[10:21-11:36] Toki 313 號" }, 
+              { time: "09:34", title: "新幹線 (上野→越後湯澤)", type: "交通", iconName: "Train", desc: "單程票價：8,410 円 (指定席)\n[09:34-10:50] Toki 311 號\n[09:58-11:15] Tanigawa 407 號 (首選)\n[10:21-11:36] Toki 313 號\n【路線：JR 上越新幹線，直達無須換線】" }, 
               { time: "11:30", title: "雪ん洞 (站內)", type: "美食", iconName: "Utensils", desc: "著名的爆彈飯糰，使用南魚沼產越光米。", image: "https://images.unsplash.com/photo-1626844131082-256783844137?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=雪ん洞+越後湯澤" }, 
               { time: "12:00", title: "中野屋 (站前名店)", type: "美食", iconName: "Utensils", desc: "百年蕎麥麵店，推薦海藻蕎麥麵。", image: "https://images.unsplash.com/photo-1600326145359-3a44909d1a39?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=中野屋+越後湯澤" }, 
               { time: "12:30", title: "越後維新", type: "美食", iconName: "Utensils", desc: "人氣沾麵。", image: "https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=越後維新+越後湯澤" }, 
-              { time: "13:00", title: "苗場山丘小屋 (Naeba Lodge)", type: "交通", iconName: "Truck", desc: "搭乘民宿預約接駁車 / 租借雪具。" }, 
+              { time: "13:00", title: "苗場山丘小屋 (Naeba Lodge)", type: "住宿", iconName: "Home", desc: "搭乘民宿預約接駁車 / 租借雪具。⚠️ 備註：需支付住宿尾款 49,500 (日幣)。\n【路線：民宿接駁車，直達無須換線】" }, 
               { time: "14:30", title: "下午首滑", type: "主景點", iconName: "Snowflake", desc: "苗場滑雪場暖身，適應雪況。" } 
             ] 
           },
@@ -187,19 +188,19 @@
           { 
             day: 4, date: "3/18", dayOfWeek: "三", fullDate: "2026-03-18", weather: "🌤️", tempHigh: 5, tempLow: -3, rainProb: 20, location: "苗場滑雪場", focus: "全日滑雪 Day 2", 
             activities: [ 
-              { time: "09:00", title: "苗場 / 田代 區域", type: "主景點", iconName: "MapIcon", desc: "搭乘「龍之纜車」前往田代區域，風景絕美。" }, 
-              { time: "12:00", title: "田代午餐", type: "美食", iconName: "Wallet", desc: "享受湖景午餐。" }, 
-              { time: "15:00", title: "返回苗場區域", type: "交通", iconName: "MapIcon", desc: "注意纜車末班時間。" }, 
-              { time: "19:00", title: "晚餐：居酒屋", type: "美食", iconName: "Wallet", desc: "慶祝滑雪行程圓滿結束。" } 
+              { time: "09:00", title: "全日滑雪 / 課程", type: "主景點", iconName: "Snowflake", desc: "苗場滑雪場 (Naeba Ski Resort) 全日滑雪，精進滑雪技巧。" }, 
+              { time: "12:00", title: "雪場午餐", type: "美食", iconName: "Wallet", desc: "Food Court 補充熱量。" }, 
+              { time: "15:00", title: "下午滑雪", type: "主景點", iconName: "Snowflake", desc: "繼續享受滑雪樂趣，注意雪場關閉時間。" }, 
+              { time: "19:00", title: "晚餐：苗場周邊烤肉 (燒肉)", type: "美食", iconName: "Utensils", desc: "滑雪後補充體力！推薦苗場周邊或王子大飯店內的燒肉餐廳 (如：焼肉 苗場)。\n【路線：步行或搭乘雪場免費接駁車】", mapLink: "https://www.google.com/maps/search/?api=1&query=苗場+燒肉" } 
             ] 
           },
           { 
             day: 5, date: "3/19", dayOfWeek: "四", fullDate: "2026-03-19", weather: "🌥️", tempHigh: 8, tempLow: 2, rainProb: 30, location: "苗場 -> 日暮里", focus: "告別雪山，日暮里夕陽", 
             activities: [ 
               { time: "09:00", title: "最後滑行 / 退房", type: "checklist", iconName: "Snowflake", desc: "把握最後時光，11:00 前辦理 Check-out。" }, 
-              { time: "12:00", title: "接駁車前往車站", type: "交通", iconName: "Truck", desc: "搭乘巴士前往越後湯澤站。" }, 
-              { time: "14:11", title: "新幹線 (越後湯澤→上野)", type: "交通", iconName: "Train", desc: "單程票價：8,410 円 (指定席)\n[14:11-15:26] Toki 326 號\n[14:44-16:00] Tanigawa 412 號\n[15:12-16:26] Toki 328 號 (底線：確保 17:00 前到日暮里)" }, 
-              { time: "16:30", title: "日暮里飯店 Check-in", type: "住宿", iconName: "Home", desc: "上野站轉 [山手線] 2 站 (4 分鐘) 抵達日暮里。" },
+              { time: "12:00", title: "接駁車前往車站", type: "交通", iconName: "Truck", desc: "搭乘巴士前往越後湯澤站。\n【路線：民宿接駁車/南越後觀光巴士，直達無須換線】" }, 
+              { time: "14:11", title: "新幹線 (越後湯澤→上野)", type: "交通", iconName: "Train", desc: "單程票價：8,410 円 (指定席)\n[14:11-15:26] Toki 326 號\n[14:44-16:00] Tanigawa 412 號\n[15:12-16:26] Toki 328 號 (底線：確保 17:00 前到日暮里)\n【路線：JR 上越新幹線，直達無須換線】" }, 
+              { time: "16:30", title: "日暮里飯店 Check-in", type: "住宿", iconName: "Home", desc: "上野站轉 [山手線] 2 站 (4 分鐘) 抵達日暮里。地址：116-0014 東京都荒川区東日暮里5-22-14\n【路線：JR 山手線 或 京濱東北線，直達無須換線】", mapLink: "https://www.google.com/maps/search/?api=1&query=116-0014+東京都荒川区東日暮里5-22-14" },
               { time: "17:30", title: "夕陽階梯看日落", type: "景點", iconName: "Camera", desc: "前往谷中銀座老街「夕陽階梯」，感受下町風情。" }
             ] 
           },
@@ -209,7 +210,7 @@
               { time: "10:00", title: "天王寺大佛、谷中銀座", type: "景點", iconName: "MapIcon", desc: "漫步下町老街，品嚐在地小吃。" }, 
               { time: "13:00", title: "根津神社", type: "景點", iconName: "Camera", desc: "參觀著名的千本鳥居。" }, 
               { time: "15:00", title: "Yanaka Coffee / Kayaba Coffee", type: "美食", iconName: "Coffee", desc: "職人烘豆，老街氣氛，咖啡密度高。", image: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Yanaka+Coffee+谷中" }, 
-              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
+              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。\n【路線：日暮里搭 JR 山手線至秋葉原，轉乘 東京地鐵日比谷線 至人形町站 (需換線1次)】", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
               { time: "19:00", title: "日山 (人形町)", type: "美食", iconName: "Utensils", desc: "頂級和牛壽喜燒名店。", image: "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=日山+人形町" }
             ] 
           },
@@ -219,7 +220,7 @@
               { time: "10:00", title: "藏前職人街、皮革小店", type: "景點", iconName: "MapIcon", desc: "東京的布魯克林，充滿文青小店與職人工房。" }, 
               { time: "13:00", title: "Leaves Coffee / Dandelion", type: "美食", iconName: "Coffee", desc: "頂級手沖咖啡與巧克力。", image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Leaves+Coffee+Roasters" }, 
               { time: "15:00", title: "隅田川岸", type: "景點", iconName: "Camera", desc: "遠眺晴空塔，享受河岸風光。" },
-              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
+              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。\n【路線：日暮里搭 JR 山手線至秋葉原，轉乘 東京地鐵日比谷線 至人形町站 (需換線1次)】", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
               { time: "19:00", title: "日山 (人形町)", type: "美食", iconName: "Utensils", desc: "頂級和牛壽喜燒名店。", image: "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=日山+人形町" }
             ] 
           },
@@ -229,17 +230,60 @@
               { time: "09:00", title: "淺草寺雷門、觀光文化中心", type: "景點", iconName: "MapIcon", desc: "避開人潮，早起參拜，地標拍照。" }, 
               { time: "11:00", title: "仲見世通購物", type: "休閒", iconName: "Wallet", desc: "採買傳統工藝品與伴手禮，全家旅遊感強。" }, 
               { time: "14:00", title: "Fuglen Asakusa", type: "美食", iconName: "Coffee", desc: "北歐風人氣咖啡館。", image: "https://images.unsplash.com/photo-1495474472204-51ea992829d6?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=Fuglen+Asakusa" },
-              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
+              { time: "18:30", title: "今半 (人形町)", type: "美食", iconName: "Utensils", desc: "★重點晚宴：百年老店頂級壽喜燒 (務必提前於 2/20 官網預約)。\n【路線：日暮里搭 JR 山手線至秋葉原，轉乘 東京地鐵日比谷線 至人形町站 (需換線1次)】", image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=人形町今半+人形町本店" },
               { time: "19:00", title: "日山 (人形町)", type: "美食", iconName: "Utensils", desc: "頂級和牛壽喜燒名店。", image: "https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=日山+人形町" }
             ] 
           },
           { 
-            day: 7, date: "3/21", dayOfWeek: "六", fullDate: "2026-03-21", weather: "⛅", tempHigh: 15, tempLow: 8, rainProb: 10, location: "日暮里 -> 台北", focus: "歸途", 
+            day: 7, date: "3/21", dayOfWeek: "六", fullDate: "2026-03-21", weather: "⛅", tempHigh: 15, tempLow: 8, rainProb: 10, location: "日暮里 -> 台北", focus: "歸途 (部分人員回程)", 
             activities: [ 
               { time: "09:00", title: "日暮里散步", type: "景點", iconName: "MapIcon", desc: "早晨悠閒散步。" },
               { time: "10:00", title: "CIBI Tokyo Store (早午餐)", type: "美食", iconName: "Coffee", desc: "工業風空間，早午餐非常出色。", image: "https://images.unsplash.com/photo-1484723091791-c0e7e53c397e?q=80&w=400&auto=format&fit=crop", mapLink: "https://www.google.com/maps/search/?api=1&query=CIBI+Tokyo+Store+日暮里" }, 
-              { time: "13:00", title: "Skyliner 前往成田", type: "交通", iconName: "Train", desc: "於「日暮里站」搭車 (始發站必有位)。\n票價：2,580 円 / 36 分鐘抵達二航廈。" }, 
-              { time: "15:30", title: "搭機返台 (CX451)", type: "交通", iconName: "Plane", desc: "國泰航空，15:30 起飛，18:40 抵達台北 (TPE)。" }
+              { time: "13:00", title: "Skyliner 前往成田", type: "交通", iconName: "Train", desc: "於「日暮里站」搭車 (始發站必有位)。\n票價：2,580 円 / 36 分鐘抵達二航廈。\n【路線：京成電鐵 Skyliner，直達無須換線】" }, 
+              { time: "15:30", title: "搭機返台 (CX451)", type: "交通", iconName: "Plane", desc: "國泰航空 CX451\n成田國際機場 (NRT) 第二航廈 15:30 起飛\n➔ 桃園國際機場 (TPE) 第一航廈 18:40 抵達\n預計飛行時間：4小時10分鐘" }
+            ] 
+          },
+          { 
+            day: 8, date: "3/22", fullDate: "2026-03-22", dayOfWeek: "日", weather: "⛅", tempHigh: 17, tempLow: 10, rainProb: 20, location: "日暮里 -> 淺草", focus: "轉移住宿與淺草觀光", 
+            activities: [ 
+              { time: "09:30", title: "辦理退房 (日暮里)", type: "住宿", iconName: "Home", desc: "整理行李，準備前往淺草。" },
+              { time: "10:30", title: "東橫INN東京淺草藏前1號店", type: "住宿", iconName: "Home", desc: "抵達飯店先寄放行李。\n【路線：日暮里搭 JR 山手線至上野，轉乘 東京地鐵銀座線 至淺草站，再步行前往 (需換線1次)】", mapLink: "https://www.google.com/maps/search/?api=1&query=東橫INN東京淺草藏前1號店" },
+              { time: "11:30", title: "淺草寺、雷門", type: "景點", iconName: "MapIcon", desc: "參拜淺草寺，在雷門前拍照留念。" },
+              { time: "12:30", title: "仲見世通", type: "休閒", iconName: "Wallet", desc: "品嚐人形燒、仙貝等傳統小吃。" },
+              { time: "15:00", title: "隅田川散步", type: "景點", iconName: "Camera", desc: "沿著河岸散步，欣賞晴空塔美景。" },
+              { time: "16:30", title: "晴空塔 (Skytree)", type: "景點", iconName: "MapIcon", desc: "可選擇登塔或在附屬商場逛街。" },
+              { time: "19:00", title: "晚餐：淺草周邊", type: "美食", iconName: "Utensils", desc: "推薦文字燒或天婦羅。" }
+            ] 
+          },
+          { 
+            day: 9, date: "3/23", dayOfWeek: "一", fullDate: "2026-03-23", weather: "☀️", tempHigh: 16, tempLow: 9, rainProb: 10, location: "東京 (新宿/澀谷)", focus: "流行文化與夜景", 
+            activities: [ 
+              { time: "09:30", title: "早餐", type: "美食", iconName: "Coffee", desc: "淺草周邊享用早餐。" },
+              { time: "10:30", title: "明治神宮", type: "景點", iconName: "MapIcon", desc: "參拜東京最具代表性的神社。\n【路線：淺草搭 東京地鐵銀座線 至表參道，轉乘 千代田線 至明治神宮前站 (需換線1次)】" },
+              { time: "12:30", title: "原宿竹下通、表參道", type: "休閒", iconName: "Wallet", desc: "逛街購物，感受年輕流行文化。\n【路線：步行前往】" },
+              { time: "15:00", title: "澀谷 SKY", type: "景點", iconName: "Camera", desc: "俯瞰東京市區美景 (建議提前預約)。\n【路線：原宿搭 JR 山手線 至澀谷站 (直達無須換線)】" },
+              { time: "18:00", title: "新宿歌舞伎町", type: "景點", iconName: "MapIcon", desc: "體驗東京繁華夜生活。\n【路線：澀谷搭 JR 山手線 至新宿站 (直達無須換線)】" },
+              { time: "19:30", title: "晚餐：新宿周邊", type: "美食", iconName: "Utensils", desc: "享用居酒屋或特色料理。\n【回程路線：新宿搭 JR 中央線 至神田，轉乘 東京地鐵銀座線 至淺草站 (需換線1次)】" }
+            ] 
+          },
+          { 
+            day: 10, date: "3/24", fullDate: "2026-03-24", dayOfWeek: "二", weather: "☀️", tempHigh: 18, tempLow: 11, rainProb: 10, location: "東京 (台場/豐洲)", focus: "海灣風情與數位藝術", 
+            activities: [ 
+              { time: "09:00", title: "豐洲市場", type: "美食", iconName: "Utensils", desc: "享用新鮮海鮮早餐或壽司。\n【路線：淺草搭 都營淺草線 至新橋，轉乘 百合海鷗號 至市場前站 (需換線1次)】" },
+              { time: "11:30", title: "teamLab Planets", type: "景點", iconName: "Camera", desc: "沉浸式數位藝術展 (務必提前預約)。\n【路線：搭乘 百合海鷗號 至新豐洲站 (直達無須換線)】" },
+              { time: "14:30", title: "台場海濱公園", type: "景點", iconName: "MapIcon", desc: "欣賞彩虹大橋與自由女神像。\n【路線：搭乘 百合海鷗號 至台場海濱公園站 (直達無須換線)】" },
+              { time: "16:00", title: "DiverCity Tokyo", type: "休閒", iconName: "Wallet", desc: "觀賞 1:1 獨角獸鋼彈立像並逛街。\n【路線：步行前往】" },
+              { time: "18:30", title: "晚餐：台場商場", type: "美食", iconName: "Utensils", desc: "在商場內享用晚餐，欣賞夜景。\n【回程路線：台場搭 百合海鷗號 至新橋，轉乘 都營淺草線 至淺草站 (需換線1次)】" }
+            ] 
+          },
+          { 
+            day: 11, date: "3/25", fullDate: "2026-03-25", dayOfWeek: "三", weather: "⛅", tempHigh: 16, tempLow: 10, rainProb: 20, location: "淺草 -> 台北", focus: "歸途", 
+            activities: [ 
+              { time: "09:00", title: "淺草周邊最後採買", type: "休閒", iconName: "Wallet", desc: "把握最後時間購買伴手禮。" },
+              { time: "10:30", title: "東橫INN東京淺草藏前1號店 退房", type: "住宿", iconName: "Home", desc: "辦理退房，帶著滿滿回憶準備前往機場。", mapLink: "https://www.google.com/maps/search/?api=1&query=東橫INN東京淺草藏前1號店" },
+              { time: "11:30", title: "前往成田機場", type: "交通", iconName: "Train", desc: "搭乘都營淺草線 (Access特急) 或至上野轉乘 Skyliner。\n【路線：淺草搭 都營淺草線 Access特急 直達成田機場 (直達無須換線)；或搭銀座線至上野轉 Skyliner (需換線1次)】" },
+              { time: "13:00", title: "抵達 NRT 成田機場", type: "交通", iconName: "MapIcon", desc: "辦理報到與行李託運。" },
+              { time: "15:30", title: "搭機返台 (CX451)", type: "交通", iconName: "Plane", desc: "國泰航空 CX451\n成田國際機場 (NRT) 第二航廈 15:30 起飛\n➔ 桃園國際機場 (TPE) 第一航廈 18:40 抵達\n預計飛行時間：4小時10分鐘" }
             ] 
           }
         ];
